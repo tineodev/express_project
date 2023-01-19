@@ -43,3 +43,11 @@ export const getSong = async (req: Request, res: Response): Promise<void> => {
     });
   }
 };
+
+export async function getExistSong(res: Response, idSong: string) {
+  const element = await prisma.song.findUnique({
+    where: { id: parseInt(idSong) },
+  });
+
+  res.json(element);
+}

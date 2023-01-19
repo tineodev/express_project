@@ -19,6 +19,7 @@ model User {
   date_born    DateTime?
   created_at   DateTime? @default(now())
   updated_at   DateTime? @updatedAt
+  playlist Playlist[]
 
   @@map("users")
 }
@@ -33,4 +34,12 @@ model Song {
   duration Int?
 
   @@map("songs")
+}
+
+model Playlist {
+  id Int @id @default(autoincrement())
+  name String
+  songs String?
+  author User @relation(fields: [authorID], references: [id])
+  authorID Int
 }
