@@ -1,10 +1,9 @@
 import { Router } from "express";
-// import { login, store } from "./controller"; FUNCIONES
+import { getSong, postSong } from "./controller";
 
-const routerSong = Router();
+const routerSong: Router = Router();
 
-routerSong.get("/");
-routerSong.post("/");
+routerSong.get("/", getSong);
+routerSong.post("/", postSong);
 
 export default routerSong;
-// ! importar funciones
