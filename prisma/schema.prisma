@@ -11,9 +11,9 @@ datasource db {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   name         String
-  email        String @unique
+  email        String    @unique
   password     String
   last_session DateTime?
   date_born    DateTime?
@@ -21,4 +21,16 @@ model User {
   updated_at   DateTime? @updatedAt
 
   @@map("users")
+}
+
+model Song {
+  id       Int     @id @default(autoincrement())
+  name     String
+  artist   String
+  album    String?
+  year     String?
+  genre    String?
+  duration Int?
+
+  @@map("songs")
 }
