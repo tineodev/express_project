@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 
 const prisma = new PrismaClient();
 
+module.exports.accessUser = false;
+
 export const login = async (req: Request, res: Response): Promise<void> => {
 
   const data = req.body;
@@ -18,24 +20,19 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     res.status(200);
 
     if (user !== null){
-      res.json({res: "existe"})
+      //res.json({res: "existe"})
       
       let isMatch = await bcrypt.compare(data.password, user.password)
 
       if(isMatch){
-        
-        console.log("Ha iniciado sesión correctamente");
-        
-        
+        module.exports.accessUser = true;
+        res.json({message: "Ha iniciado sesión correctamente"})
       }else{
-        console.log("no ok");
-        
+        res.json({message: "Contraseña incorrecta, inténtelo nuevamente"})        
       }
       
-      
-
     }else{
-      res.json({res: "El usuario NO EXISTE"})
+      res.json({message: "El usuario NO EXISTE"})
     }
     
   } catch (error) {
@@ -47,7 +44,7 @@ export const store = async (req: Request, res: Response): Promise<void> => {
      
   try {
     const data = req.body;
-    // cantidad de saltos, mientras + haya, + demora
+    // cantidad de saltos
     data.password = await bcrypt.hash(data.password,8)
 
     await prisma.user.create({ data });

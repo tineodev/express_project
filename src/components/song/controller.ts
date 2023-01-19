@@ -1,5 +1,9 @@
 import type { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+/*
+var userC = require('../user/controller')
+console.log(userC.accessUser); //* true | false
+*/
 
 const prisma = new PrismaClient();
 
