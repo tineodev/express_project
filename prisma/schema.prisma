@@ -39,7 +39,6 @@ model Song {
 model Playlist {
   id Int @id @default(autoincrement())
   name String
-  songs String?
   author User @relation(fields: [authorID], references: [id])
   authorID Int
 
