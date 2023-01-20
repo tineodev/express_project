@@ -2,9 +2,13 @@ import type { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 const bcrypt = require('bcrypt');
 
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
+
 const prisma = new PrismaClient();
 
-module.exports.accessUser = false;
+//module.exports.accessUser = false;
 
 export const login = async (req: Request, res: Response): Promise<void> => {
 
@@ -20,19 +24,25 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     res.status(200);
 
     if (user !== null){
-      //res.json({res: "existe"})
-      
+     
       let isMatch = await bcrypt.compare(data.password, user.password)
 
       if(isMatch){
-        module.exports.accessUser = true;
-        res.json({message: "Ha iniciado sesión correctamente"})
+        //module.exports.accessUser = true;
+        const token = jwt.sign({ user }, process.env.SECRET_KEY??"", {
+          expiresIn: "12h",
+        });
+        res.status(201).json({ 
+          user, 
+          token
+        });
+        
       }else{
-        res.json({message: "Contraseña incorrecta, inténtelo nuevamente"})        
+        res.json({message: "Password incorrect"})        
       }
       
     }else{
-      res.json({message: "El usuario NO EXISTE"})
+      res.json({message: "This Email doesn't exist"})
     }
     
   } catch (error) {
