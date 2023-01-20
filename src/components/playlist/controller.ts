@@ -46,3 +46,19 @@ export const postPlaylist = async (
     });
   }
 };
+
+export const deletePlaylist = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const data = req.body;
+  const deleteUser = await prisma.playlist.delete({
+    where: {
+      id: data.id,
+    },
+  });
+  res.status(201).json({
+    ok: true,
+    message: "Playlist successfully created",
+  });
+};
