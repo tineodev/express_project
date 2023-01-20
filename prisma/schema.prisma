@@ -42,4 +42,6 @@ model Playlist {
   songs String?
   author User @relation(fields: [authorID], references: [id])
   authorID Int
+
+  @@map("playlists")
 }
