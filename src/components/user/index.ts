@@ -5,7 +5,7 @@ import { validateAuthorization } from "./middleware";
 const userRouter: Router = Router();
 
 userRouter.post("/login", login);
-userRouter.post("/", validateAuthorization, store);
+userRouter.post("/", store);
 
 
 export default userRouter;
