@@ -32,6 +32,7 @@ model Song {
   year      Int?
   genre     String?
   duration  Int?
+  public Boolean @default(true)
   playlists Playlist[] @relation(name: "PlaylistSongs")
 
   @@map("songs")

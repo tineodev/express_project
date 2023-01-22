@@ -19,6 +19,7 @@ export const postSong = async (req: Request, res: Response): Promise<void> => {
         year: datos.year,
         genre: datos.genre,
         duration: datos.duration,
+        public: datos.public
       },
     });
 
