@@ -19,7 +19,7 @@ export const postSong = async (req: Request, res: Response): Promise<void> => {
         year: datos.year,
         genre: datos.genre,
         duration: datos.duration,
-        public: datos.public
+        public: datos.public,
       },
     });
 
@@ -35,7 +35,11 @@ export const postSong = async (req: Request, res: Response): Promise<void> => {
 
 export const getSong = async (req: Request, res: Response): Promise<void> => {
   try {
-    const element = await prisma.song.findMany();
+    const element = await prisma.song.findMany({
+      where: {
+        public: true,
+      },
+    });
     res.status(200).json(element);
   } catch (error) {
     res.status(500).json({
