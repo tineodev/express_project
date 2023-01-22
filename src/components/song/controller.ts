@@ -8,6 +8,9 @@ const prisma = new PrismaClient();
 export const postSong = async (req: Request, res: Response): Promise<void> => {
   try {
     const datos = req.body;
+    if (datos.year <= 0) {
+      throw new Error("Use correct dates");
+    }
 
     const element = await prisma.song.create({
       data: {
