@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import { getExistSong } from "../song/controller";
 
 const prisma = new PrismaClient();
 

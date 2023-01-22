@@ -44,10 +44,26 @@ export const getSong = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export async function getExistSong(res: Response, idSong: string) {
-  const element = await prisma.song.findUnique({
-    where: { id: parseInt(idSong) },
-  });
+export const getSongID = async (req: Request, res: Response) => {
+  try {
+    const urlID = req.params.id;
 
-  res.json(element);
-}
+    const element = await prisma.song.findUnique({
+      where: {
+        id: Number(urlID),
+      },
+    });
+    if (element) {
+      res.status(200).json(element);
+    }
+    res.status(404).json({
+      ok: false,
+      message: "Song not found",
+    });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      message: error,
+    });
+  }
+};
