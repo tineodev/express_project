@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import { validateToken } from "../user/middleware";
 
 var userLogin = require("../user/controller");
 
@@ -36,7 +37,9 @@ export const postSong = async (req: Request, res: Response): Promise<void> => {
 
 export const getSong = async (req: Request, res: Response): Promise<void> => {
   try {
-    if (userLogin.accessUser) {
+    const valorToken = validateToken(req, res)
+
+    if (valorToken) {
       const element = await prisma.song.findMany({
         where: {},
       });
