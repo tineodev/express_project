@@ -27,6 +27,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
       if (isMatch) {
         module.exports.accessUser = true;
+
+        const date = new Date().toISOString();
+        const last_session = await prisma.user.update({
+          where: { email: data.email, },
+          data: { last_session: date, }
+        });
+  
         const token = jwt.sign({ user }, process.env.SECRET_KEY ?? "", {
           expiresIn: "12h",
         });
@@ -37,6 +44,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       } else {
         res.json({ message: "Password incorrect" });
       }
+
     } else {
       res.json({ message: "This Email doesn't exist" });
     }
