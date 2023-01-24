@@ -1,9 +1,7 @@
 # Proyecto Fin de Unidad 07 [AULA 05 - Ruta A]
 Este es un proyecto de Silabuz Academy del Curso MPTE BE de la Unidad 07 Express + TypeScript.
 
-
-## Primer Proyecto
-Nombrado como ```tarea01.py```, este primer proyecto se centra en registrar, visualizar y eliminar libros dentro de un archivo **.csv**, dispone de diversos métodos de búsqueda y filtrado, además de una interfaz de editado de los datos de un libro dentro de la base de datos (archivo **.csv**).
+Proyecto centrado en la creacion de usuarios, canciones y playlists, usando Node.js, Express, rutas REST, Prisma, Typescript, SQLite DB, y herramientas para el control de versiones como Git
 
 
 ## Pre-requisitos 📋 
