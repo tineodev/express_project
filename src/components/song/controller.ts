@@ -82,11 +82,11 @@ export const getSongID = async (req: Request, res: Response) => {
         ok: true,
         results: element,
       });
-    }
+    } else {
     res.status(404).json({
       ok: false,
       message: "Song not found",
-    });
+    });}
   } catch (error) {
     res.status(500).json({
       ok: false,
